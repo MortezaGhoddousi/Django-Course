@@ -1,0 +1,46 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block content %}
+<article class="products">
+    <section class="part1">
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">home</a></li>
+                <span>/</span>
+                <li><a class="active" href="{% url 'products' %}">products</a></li>
+            </ul>
+        </nav>
+        <h1>products</h1>
+    </section>
+
+    <section class="part2">
+        <div>
+            <h2>Showing all 9 results</h2>
+            <select name="sortProducts" id="sortProducts">
+                <option value="Default sorting">Default sorting</option>
+                <option value="Sort by popularity">Sort by popularity</option>
+                <option value="Sort by average rating">Sort by average rating</option>
+                <option value="Sort by latest">Sort by latest</option>
+                <option value="Sort by price: low to high">Sort by price: low to high</option>
+                <option value="Sort by price: high to low">Sort by price: high to low</option>
+            </select>
+        </div>
+        <div>
+            {% for product in products %}
+                <aside id="{{ product.id }}">
+                <img src="{% static product.img %}" alt="">
+                <h3>{{ product.title }}</h3>
+                <p>${{ product.price }}</p>
+                <span>{{ product.category }}</span>
+                {% if product.id in userProduct %}
+                    <button class="productBtn">Added</button>
+                {% else %}
+                    <button class="productBtn">Add to cart</button>
+                {% endif %}
+                </aside>
+            {% endfor %}
+        </div>
+    </section>
+</article>  
+{% endblock %}

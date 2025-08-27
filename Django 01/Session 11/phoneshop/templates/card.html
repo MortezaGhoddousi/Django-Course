@@ -1,0 +1,66 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block content %}
+<article class="cart">
+    <section class="part1">
+        <h1>Cart</h1>
+        <div>
+            <i class='bx bx-bell'></i>
+            <span>Your cart is currently empty.</span>
+        </div>
+        <a href="{% url 'products' %}" class="returnToShop">Return to shop</a>
+    </section>
+
+    <section class="part2">
+        <h1>Cart</h1>
+        <div>
+            <table class="cart">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>
+                            <a href="#"><img src="{% static product.img %}" alt="product" /></a>
+                            <a href="#">
+                                <h3>{{ product.name }}</h3>
+                            </a>
+                            <p>${{ product.price }}</p>
+                        </td>
+                        <td id="">
+                            <button class="decreaseProductBtn">-</button>
+                            <span class="numberOfProduct"></span>
+                            <button class="increaseProductBtn">+</button>
+                        </td>
+                        <td class='delete'>
+                            <span></span>
+                            <i class='bx bxs-trash-alt'></i>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <form method="POST" action="cart.php">
+                <input type="text" name="couponCode" placeholder="Coupon code">
+                <input type="submit" name="apply" value="Apply coupon">
+            </form>
+
+        
+        </div>
+        <aside>
+            <h1>Cart totals</h1>
+            <h2>Subtotal</h2>
+            <span>$<?php echo($sum); ?></span>
+            <h2>Total</h2>
+            <span>$<?php echo($discountedSum); ?></span>
+            <input type="submit" name="ProceedToCheckout" value="Proceed to checkout">
+        </aside>
+    </section>
+</article>
+{% endblock %}
