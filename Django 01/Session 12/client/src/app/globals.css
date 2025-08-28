@@ -1,0 +1,3126 @@
+:root {
+    --secBG: rgb(17 21 24);
+    --main: rgb(73 35 230);
+    --txtColor: #888;
+    --plr: 5vw;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    overflow-x: hidden;
+}
+
+/* start header & footer */
+
+.hide {
+    z-index: 111111;
+    position: fixed;
+    border-radius: 7px;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60vw;
+    height: fit-content;
+    background-color: #09917f;
+    color: #fff;
+    font-size: 24px;
+    display: none;
+    transition: 0.3s ease;
+    padding: 10px 50px;
+}
+
+.hide p {
+    text-align: center;
+}
+
+#bag {
+    /* display: none; */
+    position: relative;
+}
+
+.badge {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    transform: translate(-50%, 50%);
+    height: 17px;
+    width: 17px;
+    background-color: #5b38ed;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 100;
+}
+
+#signout {
+    display: flex;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    background-color: #f2f4f7;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+#signout:hover {
+    background-color: rgb(159, 2, 2);
+    color: #fff;
+}
+
+.modal {
+    display: none;
+    transition: 0.5s ease;
+}
+
+#modal {
+    z-index: 1100;
+    background-color: #fff;
+    color: #000;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    min-width: 35vw;
+    padding: 4vw;
+    border-radius: 7px;
+}
+
+#modal,
+#modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#modal a,
+.signupLogin a {
+    display: inline-flex;
+    justify-content: center;
+    color: #000;
+    font-weight: normal;
+    font-size: 15px;
+    transition: all ease 0.3s;
+}
+
+#modal a:hover {
+    color: var(--main);
+}
+
+.signupLogin {
+    width: 35vw;
+    padding: 3vw 4vw;
+    border-radius: 7px;
+    border: 2px solid #000;
+    margin: 2rem auto;
+}
+
+.signupLogin h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#modal form,
+.signupLogin form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#modal label,
+.signupLogin label {
+    font-size: 14px;
+    color: var(--txtColor);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.signupLogin input.error {
+    border: 1px solid red;
+}
+
+.signupLogin p.error {
+    color: red;
+    font-size: 14px;
+}
+
+#modal input,
+.signupLogin input {
+    border: 1px solid #eee;
+    outline: none;
+    padding: 15px 10px;
+    border-radius: 7px;
+    width: 100%;
+    transition: all ease 0.3s;
+}
+
+#modal input:focus,
+.signupLogin input:focus {
+    border: 1px solid var(--main);
+}
+
+#modal input[type="checkbox"],
+.signupLogin input[type="checkbox"] {
+    width: auto;
+    margin-left: 5px;
+}
+
+#modal input[value="Login"],
+#modal input[value="Signup"],
+.signupLogin input[value="Signup"] {
+    font-size: 17px;
+    transition: all ease 0.3s;
+}
+
+#modal input[value="Login"],
+.signupLogin input[value="Login"] {
+    background-color: #000;
+    font-size: 17px;
+    color: #fff;
+}
+
+#modal input[value="Login"]:hover,
+#modal input[value="Signup"]:hover,
+.signupLogin input[value="Signup"]:hover,
+.signupLogin input[value="Login"]:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+#bagCard {
+    min-width: 310px;
+    position: absolute;
+    right: 1rem;
+    top: 8rem;
+    background-color: #29333c;
+    border-radius: 7px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#bagCard > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "bagCardSubtotal bagCardSum"
+        "bagCardViewCart bagCardCheckout";
+    gap: 10px;
+}
+
+#bagCard > div h2 {
+    grid-area: bagCardSubtotal;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+#bagCard > div span {
+    grid-area: bagCardSum;
+    justify-self: end;
+}
+
+#bagCard > div a:nth-child(3) {
+    grid-area: bagCardViewCart;
+}
+
+#bagCard > div a:nth-child(4) {
+    grid-area: bagCardCheckout;
+    justify-self: end;
+}
+
+#bagCard > div a:nth-child(3),
+#bagCard > div a:nth-child(4) {
+    width: 100%;
+    border-radius: 7px;
+    background-color: #f2f4f7;
+    color: #000;
+    padding: 12px;
+    font-size: 13px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal;
+    transition: all ease 0.3s;
+}
+
+#bagCard > div a:nth-child(3):hover,
+#bagCard > div a:nth-child(4):hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+#bagCard aside {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "bagCardImage bagCardName bagCardRemove"
+        "bagCardImage bagCardPrice bagCardRemove";
+    column-gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#bagCard aside a:nth-child(1) {
+    grid-area: bagCardImage;
+}
+
+#bagCard aside a:nth-child(2) {
+    grid-area: bagCardName;
+    font-size: 12px;
+    transition: all ease 0.3s;
+}
+
+#bagCard aside p {
+    grid-area: bagCardPrice;
+    font-size: 14px;
+}
+
+#bagCard aside a:nth-child(2):hover {
+    color: var(--main);
+}
+
+#bagCard aside i {
+    grid-area: bagCardRemove;
+    align-self: center;
+    justify-self: center;
+    margin-right: 10px;
+    transition: all ease 0.3s;
+}
+
+#bagCard aside i:hover {
+    color: red;
+}
+
+#bagCard aside a:nth-child(1) img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.signupLogin input[value="Signup"] {
+    background-color: #000;
+    color: #fff;
+}
+
+.signupLogin span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    gap: 5px;
+}
+
+.signupLogin a {
+    color: var(--main);
+}
+
+header {
+    width: 100vw;
+    padding: 50px var(--plr);
+    background-color: var(--secBG);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+header img {
+    width: 10vw;
+}
+
+header a {
+    color: #fff;
+    font-weight: bold;
+}
+
+header ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+header nav ul {
+    gap: 38px;
+}
+
+header nav ul li a {
+    color: #aaa;
+    text-transform: capitalize;
+}
+
+header nav ul li.active a,
+header nav ul li:hover a {
+    color: #fff;
+}
+
+footer {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+footer > div:nth-child(1) {
+    padding: 10vw 0;
+    background-color: #181c1f;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: 3rem;
+}
+
+footer > div:nth-child(1) h1 {
+    color: #fff;
+    font-size: 40px;
+    align-self: center;
+    justify-self: center;
+}
+
+footer > div:nth-child(1) form {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 10px;
+}
+
+footer > div:nth-child(1) form input[name="email"] {
+    width: 100%;
+    background-color: #000;
+    border-radius: 7px;
+    padding: 20px 25px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    transition: all ease 0.3s;
+    width: 40vw;
+    color: #fff;
+}
+
+footer > div:nth-child(1) form input[name="email"]:focus {
+    background-color: #0e1012;
+}
+
+footer > div:nth-child(1) form input[name="submit"] {
+    width: 100%;
+    border-radius: 7px;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #5b38ed;
+    padding: 1rem;
+    transition: all ease 0.3s;
+}
+
+footer > div:nth-child(1) form input[name="email"]:hover {
+    background-color: var(--main);
+    cursor: pointer;
+}
+
+footer > div:nth-child(2) {
+    padding: 8vw var(--plr) 2rem;
+    background-color: #111518;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "footerBox1 footerBox2 footerBox3 footerBox4"
+        "footerCopyRight footerCopyRight footerCopyRight footerCopyRight";
+    gap: 3.5rem;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) {
+    grid-area: footerBox1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+footer > div:nth-child(2) aside:nth-child(2) {
+    grid-area: footerBox2;
+}
+
+footer > div:nth-child(2) aside:nth-child(3) {
+    grid-area: footerBox3;
+}
+
+footer > div:nth-child(2) aside:nth-child(4) {
+    grid-area: footerBox4;
+}
+
+footer > div:nth-child(2) aside:nth-child(5) {
+    grid-area: footerBox5;
+}
+
+footer > div:nth-child(2) > p {
+    grid-area: footerCopyRight;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) img {
+    width: 60%;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) p,
+footer > div:nth-child(2) aside:nth-child(4) p {
+    color: var(--txtColor);
+    line-height: 30px;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) ul li {
+    background-color: #fff;
+    border-radius: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) ul li i {
+    font-size: 20px;
+    color: #000;
+    transition: all ease 0.3s;
+}
+
+footer > div:nth-child(2) aside:nth-child(1) ul li:hover i {
+    color: var(--main);
+}
+
+footer > div:nth-child(2) aside:nth-child(2) h1,
+footer > div:nth-child(2) aside:nth-child(3) h1,
+footer > div:nth-child(2) aside:nth-child(4) h1 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+footer > div:nth-child(2) aside:nth-child(2) ul,
+footer > div:nth-child(2) aside:nth-child(3) ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+
+footer > div:nth-child(2) aside:nth-child(2) ul li,
+footer > div:nth-child(2) aside:nth-child(3) ul li {
+    font-size: 16px;
+}
+
+footer > div:nth-child(2) aside:nth-child(2) ul li a,
+footer > div:nth-child(2) aside:nth-child(3) ul li a {
+    color: var(--txtColor);
+    transition: all ease 0.3s;
+}
+
+footer > div:nth-child(2) aside:nth-child(2) ul li a:hover,
+footer > div:nth-child(2) aside:nth-child(3) ul li a:hover {
+    color: var(--main);
+}
+
+footer > div:nth-child(2) > p {
+    color: var(--txtColor);
+}
+
+/* end header & footer */
+/* start homePage */
+
+.homePage .part1 {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    padding: 100px var(--plr) 0;
+    background: var(--secBG);
+}
+
+.homePage .part1 aside:nth-child(1) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "contentPart1 contentPart1"
+        "headingPart1 headingPart1"
+        "btnPart1 linkPart1";
+    gap: 10px;
+    height: fit-content;
+}
+
+.homePage .part1 aside:nth-child(1) p {
+    color: #ccc;
+    font-size: 18px;
+    grid-area: contentPart1;
+    align-self: end;
+}
+
+.homePage .part1 aside:nth-child(1) h1 {
+    color: #fff;
+    font-size: 38px;
+    grid-area: headingPart1;
+}
+
+.homePage .part1 aside:nth-child(1) button {
+    grid-area: btnPart1;
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 15px 30px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    margin-right: 20px;
+    border: none;
+    outline: none;
+    white-space: nowrap;
+}
+
+.homePage .part1 aside:nth-child(1) button:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.homePage .part1 aside:nth-child(1) a {
+    color: #aaa;
+    font-weight: bold;
+    font-size: 18px;
+    grid-area: linkPart1;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    width: fit-content;
+    white-space: nowrap;
+    transition: all ease 0.3s;
+}
+
+.homePage .part1 aside:nth-child(1) a:hover {
+    color: #fff;
+}
+
+.homePage .part1 img {
+    width: 100%;
+}
+
+.homePage .part1 aside:nth-child(3) {
+    box-shadow: inset 0 0 30px #000;
+    border-radius: 15px;
+    color: #fff;
+    backdrop-filter: blur(35px);
+    background: rgba(17 21 24 0.8);
+    position: absolute;
+    width: 90vw;
+    padding: 40px 40px;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homePage .part1 aside:nth-child(3) ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+.homePage .part1 aside:nth-child(3) ul li {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "part1Icon part1Heading"
+        "part1Icon part1Text";
+    column-gap: 15px;
+    row-gap: 5px;
+}
+
+.homePage .part1 aside:nth-child(3) ul li i {
+    grid-area: part1Icon;
+    font-size: 45px;
+    align-self: center;
+    justify-self: center;
+}
+
+.homePage .part1 aside:nth-child(3) ul li h4 {
+    grid-area: part1Heading;
+}
+
+.homePage .part1 aside:nth-child(3) ul li p {
+    grid-area: part1Text;
+    font-size: 15px;
+    color: var(--txtColor);
+}
+
+.homePage .part2 {
+    width: 100vw;
+    padding: 100px var(--plr);
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "part2Box1 part2Box1 part2Box2 part2Box2"
+        "part2Box1 part2Box1 part2Box3 part2Box4";
+    gap: 30px;
+    background-color: #f2f4f7;
+}
+
+.homePage .part2 div:nth-child(1) {
+    grid-area: part2Box1;
+    height: 40vw;
+}
+
+.homePage .part2 div:nth-child(2) {
+    grid-area: part2Box2;
+}
+
+.homePage .part2 div:nth-child(3) {
+    grid-area: part2Box3;
+}
+
+.homePage .part2 div:nth-child(4) {
+    grid-area: part2Box4;
+}
+
+.homePage .part2 div:nth-child(1):hover {
+    background-color: #ffc750;
+}
+
+.homePage .part2 div:nth-child(2):hover {
+    background-color: var(--main);
+}
+
+.homePage .part2 div:nth-child(3):hover {
+    background-color: #09917f;
+}
+
+.homePage .part2 div:nth-child(4):hover {
+    background-color: #242629;
+}
+
+.homePage .part2 div:hover h4 {
+    color: #fff;
+}
+
+.homePage .part2 div {
+    position: relative;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 5px 5px #eee;
+    padding: 2.5vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    transition: all ease 0.3s;
+}
+
+.homePage .part2 div img {
+    width: 100%;
+}
+
+.homePage .part2 div h4 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.homePage .part2 div p {
+    color: var(--txtColor);
+    font-weight: bold;
+}
+
+.homePage .part2 div:nth-child(1) img,
+.homePage .part2 div:nth-child(2) img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.homePage .part2 div:nth-child(1) img {
+    width: 70%;
+}
+
+.homePage .part2 div:nth-child(2) img {
+    width: 60%;
+}
+
+.homePage .part2 div:nth-child(3) img {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0px;
+    width: 50%;
+}
+
+.homePage .part2 div:nth-child(4) img {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 65%;
+}
+
+.homePage .part3 {
+    padding: 100px var(--plr);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "part3Box1 part3Box2 part3Box3 part3Box4"
+        "part3Box5 part3Box5 part3Box5 part3Box5";
+    gap: 2rem;
+    width: 100vw;
+}
+
+.homePage .part3 div:nth-child(1) {
+    grid-area: part3Box1;
+}
+
+.homePage .part3 div:nth-child(2) {
+    grid-area: part3Box2;
+}
+
+.homePage .part3 div:nth-child(3) {
+    grid-area: part3Box3;
+}
+
+.homePage .part3 div:nth-child(4) {
+    grid-area: part3Box4;
+}
+
+.homePage .part3 div:nth-child(5) {
+    grid-area: part3Box5;
+}
+
+.homePage .part3 div:nth-child(1),
+.homePage .part3 div:nth-child(2),
+.homePage .part3 div:nth-child(3),
+.homePage .part3 div:nth-child(4) {
+    background-color: #f3f5f7;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    transition: all ease 0.3s;
+}
+
+.homePage .part3 div:nth-child(1):hover,
+.homePage .part3 div:nth-child(2):hover,
+.homePage .part3 div:nth-child(3):hover,
+.homePage .part3 div:nth-child(4):hover {
+    background-color: var(--main);
+}
+
+.homePage .part3 div:nth-child(1):hover h3,
+.homePage .part3 div:nth-child(2):hover h3,
+.homePage .part3 div:nth-child(3):hover h3,
+.homePage .part3 div:nth-child(4):hover h3 {
+    color: #fff;
+}
+
+.homePage .part3 div:nth-child(1) h3,
+.homePage .part3 div:nth-child(2) h3,
+.homePage .part3 div:nth-child(3) h3,
+.homePage .part3 div:nth-child(4) h3 {
+    font-size: 18px;
+}
+
+.homePage .part3 div:nth-child(1) hr,
+.homePage .part3 div:nth-child(2) hr,
+.homePage .part3 div:nth-child(3) hr,
+.homePage .part3 div:nth-child(4) hr {
+    width: 2rem;
+    height: 2px;
+    background-color: #ccc;
+    border: none;
+    outline: none;
+    border-radius: 100px;
+    margin: 1.5rem 0;
+}
+
+.homePage .part3 div:nth-child(1) p,
+.homePage .part3 div:nth-child(2) p,
+.homePage .part3 div:nth-child(3) p,
+.homePage .part3 div:nth-child(4) p {
+    font-size: 15px;
+    color: var(--txtColor);
+}
+
+.homePage .part3 div:nth-child(5) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #4526c1;
+    background: linear-gradient(
+        20deg,
+        rgba(69, 38, 193, 1) 0%,
+        rgba(0, 0, 0, 1) 90%
+    );
+    border-radius: 20px;
+    color: #fff;
+    padding: 6vw;
+    margin-top: 5vw;
+}
+
+.homePage .part3 div:nth-child(5) img {
+    width: 40%;
+}
+
+.homePage .part3 div:nth-child(5) aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas:
+        "part3Heading part3Heading part3Heading part3Heading"
+        "part3Text part3Text part3Text part3Text"
+        "part3Button part3Link . .";
+    gap: 1rem;
+}
+
+.homePage .part3 div:nth-child(5) aside h1 {
+    grid-area: part3Heading;
+    font-size: 50px;
+}
+
+.homePage .part3 div:nth-child(5) aside p {
+    grid-area: part3Text;
+    font-size: 18px;
+}
+
+.homePage .part3 div:nth-child(5) aside button {
+    grid-area: part3Button;
+    font-size: 18px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    white-space: nowrap;
+    transition: all ease 0.3s;
+}
+
+.homePage .part3 div:nth-child(5) aside button:hover {
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.homePage .part3 div:nth-child(5) aside a {
+    grid-area: part3Link;
+    color: #f3f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.homePage .part3 div:nth-child(5) aside a i {
+    margin-top: 5px;
+}
+
+.homePage .part4,
+.homePage .part7,
+.contactUs .part4 {
+    padding: 100px var(--plr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+.homePage .part4 > div,
+.homePage .part7 > div,
+.contactUs .part4 > div {
+    width: 100%;
+}
+
+.homePage .part4 > div:nth-child(1),
+.homePage .part7 > div:nth-child(1),
+.contactUs .part4 > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+}
+
+.homePage .part4 > div:nth-child(1) h1,
+.homePage .part7 > div:nth-child(1) h1,
+.contactUs .part4 > div:nth-child(1) h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.homePage .part4 > div:nth-child(1) p,
+.homePage .part7 > div:nth-child(1) p,
+.contactUs .part4 > div:nth-child(1) p {
+    font-size: 18px;
+    color: var(--txtColor);
+    margin: 1rem 0;
+}
+
+.homePage .part4 > div:nth-child(1) button,
+.homePage .part4 > div:nth-child(2) aside button,
+.homePage .part7 > div:nth-child(1) button,
+.products .part2 > div:nth-child(2) aside button,
+.contactUs .part4 > div:nth-child(1) button,
+.contactUs .part4 > div:nth-child(2) aside button {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    font-size: 15px;
+    padding: 1rem 1.5rem;
+    background-color: #f3f5f7;
+    transition: all ease 0.3s;
+}
+
+.homePage .part4 > div:nth-child(1) button:hover,
+.homePage .part4 > div:nth-child(2) aside button:hover,
+.homePage .part7 > div:nth-child(1) button:hover,
+.products .part2 > div:nth-child(2) aside button:hover,
+.contactUs .part4 > div:nth-child(1) button:hover,
+.contactUs .part4 > div:nth-child(2) aside button:hover {
+    background-color: var(--main);
+    color: #fff;
+    cursor: pointer;
+}
+
+.homePage .part4 > div button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.homePage .part4 > div:nth-child(2),
+.contactUs .part4 > div:nth-child(2) {
+    display: grid;
+    grid-auto-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "part4Box1 part4Box2 part4Box3"
+        "part4Box4 part4Box5 part4Box6";
+    gap: 2rem;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(1),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(1) {
+    grid-area: part4Box1;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(2),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(2) {
+    grid-area: part4Box2;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(3),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(3) {
+    grid-area: part4Box3;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(4),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(4) {
+    grid-area: part4Box4;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(5),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(5) {
+    grid-area: part4Box5;
+}
+
+.homePage .part4 > div:nth-child(2) aside:nth-child(6),
+.contactUs .part4 > div:nth-child(2) aside :nth-child(6) {
+    grid-area: part4Box6;
+}
+
+.homePage .part4 > div:nth-child(2) aside,
+.products .part2 > div:nth-child(2) aside,
+.contactUs .part4 > div:nth-child(2) aside {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    gap: 15px;
+    height: 100%;
+}
+
+.homePage .part4 > div:nth-child(2) aside img,
+.products .part2 > div:nth-child(2) aside img,
+.contactUs .part4 > div:nth-child(2) aside img {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: all ease 0.3s;
+}
+
+.homePage .part4 > div:nth-child(2) aside p,
+.homePage .part4 > div:nth-child(2) aside span,
+.products .part2 > div:nth-child(2) aside p,
+.products .part2 > div:nth-child(2) aside span,
+.contactUs .part4 > div:nth-child(2) aside p,
+.contactUs .part4 > div:nth-child(2) aside span {
+    color: #4d5d6d;
+    font-size: 16px;
+}
+
+.homePage .part4 > div:nth-child(2) aside h3,
+.homePage .part4 > div:nth-child(2) aside span,
+.products .part2 > div:nth-child(2) aside h3,
+.products .part2 > div:nth-child(2) aside span,
+.contactUs .part4 > div:nth-child(2) aside h3,
+.contactUs .part4 > div:nth-child(2) aside span {
+    transition: all ease 0.3s;
+}
+
+.homePage .part4 > div:nth-child(2) aside h3:hover,
+.homePage .part4 > div:nth-child(2) aside span:hover,
+.products .part2 > div:nth-child(2) aside h3:hover,
+.products .part2 > div:nth-child(2) aside span:hover,
+.contactUs .part4 > div:nth-child(2) aside h3:hover,
+.contactUs .part4 > div:nth-child(2) aside span:hover {
+    color: var(--main);
+    cursor: pointer;
+}
+
+.homePage .part5 {
+    padding: 100px var(--plr);
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111518;
+    position: relative;
+}
+
+.homePage .part5 img {
+    width: 65%;
+}
+
+.homePage .part5 aside:nth-child(2) {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 15px;
+}
+
+.homePage .part5 aside:nth-child(2) p {
+    color: #f3f5f7;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.homePage .part5 aside:nth-child(2) h1 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.homePage .part5 aside:nth-child(2) h4 {
+    color: #f3f5f7;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.homePage .part5 aside:nth-child(2) button {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 1rem 2rem;
+    color: black;
+    background-color: #f3f5f7;
+    font-size: 16px;
+    transition: all ease 0.3s;
+}
+
+.homePage .part5 aside:nth-child(2) button:hover,
+.homePage .part6 > div button:hover {
+    color: #fff;
+    background-color: var(--main);
+    cursor: pointer;
+}
+
+.homePage .part5 aside:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 2rem;
+    position: absolute;
+    left: 25vw;
+    top: 25vw;
+    width: 25vw;
+    color: #fff;
+    gap: 15px;
+    backdrop-filter: blur(50px);
+    background: rgba(8, 11, 13, 6.04);
+    background: linear-gradient(
+        -90deg,
+        rgba(8, 11, 13, 0.2) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+    );
+}
+
+.homePage .part5 aside:nth-child(3) p {
+    line-height: 30px;
+}
+
+.homePage .part6 {
+    padding: 100px var(--plr);
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.homePage .part6 > div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.7rem;
+    justify-content: space-between;
+    border: 1px solid #f2f4f7;
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all ease 0.3s;
+}
+
+.homePage .part6 > div:hover {
+    box-shadow: 0 0 26px -5px #eee;
+}
+
+.homePage .part6 > div aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 100px;
+    background-color: #000;
+    transition: all ease 0.3s;
+}
+
+.homePage .part6 > div aside i {
+    font-size: 40px;
+    color: #fff;
+}
+
+.homePage .part6 > div:hover aside {
+    background-color: var(--main);
+}
+
+.homePage .part6 > div p {
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.homePage .part6 > div button {
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 1.2rem 1.7rem;
+    color: black;
+    background-color: #f3f5f7;
+    font-size: 16px;
+    transition: all ease 0.3s;
+}
+
+.homePage .part7 > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.homePage .part7 > div:nth-child(2) aside,
+.blog .part2 aside {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 30vw;
+    overflow-x: hidden;
+    box-shadow: 0 0 26px -5px #eee;
+}
+
+.homePage .part7 > div:nth-child(2) aside img,
+.blog .part2 aside img {
+    width: 100%;
+    height: 22vw;
+    object-fit: cover;
+}
+
+.homePage .part7 > div:nth-child(2) aside div,
+.blog .part2 aside div {
+    width: 100%;
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.homePage .part7 > div:nth-child(2) aside div span,
+.blog .part2 aside div span {
+    font-size: 14px;
+    color: #4d5d6d;
+}
+
+.homePage .part7 > div:nth-child(2) aside div h3,
+.homePage .part7 > div:nth-child(2) aside div span,
+.blog .part2 aside div h3,
+.blog .part2 aside div span {
+    transition: all ease 0.3s;
+}
+
+.homePage .part7 > div:nth-child(2) aside div h3:hover,
+.homePage .part7 > div:nth-child(2) aside div span:hover,
+.blog .part2 aside div h3:hover,
+.blog .part2 aside div span:hover {
+    color: var(--main);
+    cursor: pointer;
+}
+
+.homePage .part7 > div:nth-child(2) aside div p,
+.blog .part2 aside div p {
+    line-height: 30px;
+    color: #4d5d6d;
+}
+
+.homePage .part7 > div:nth-child(2) aside div button,
+.blog .part2 aside div button {
+    border: none;
+    outline: none;
+    padding: 0.8rem 1rem;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 7px;
+    color: #000;
+    background-color: #f3f5f7;
+    transition: all ease 0.3s;
+}
+
+.homePage .part7 > div:nth-child(2) aside div button:hover,
+.blog .part2 aside div button:hover {
+    color: #fff;
+    background-color: var(--main);
+    cursor: pointer;
+}
+
+/* end homePage */
+/* start products page */
+
+.products .part1,
+.aboutUs .part1,
+.blog .part1,
+.contactUs .part1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secBG);
+    color: #fff;
+    gap: 1rem;
+    padding: 6vw var(--plr);
+}
+
+.products .part1 nav ul,
+.aboutUs .part1 nav ul,
+.blog .part1 nav ul,
+.contactUs .part1 nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.products .part1 nav ul li a,
+.aboutUs .part1 nav ul li a,
+.blog .part1 nav ul li a,
+.contactUs .part1 nav ul li a {
+    color: var(--txtColor);
+    text-transform: uppercase;
+}
+
+.products .part1 nav ul li a.active,
+.aboutUs .part1 nav ul li a.active,
+.blog .part1 nav ul li a.active,
+.contactUs .part1 nav ul li a.active {
+    color: #fff;
+}
+
+.products .part1 h1,
+.aboutUs .part1 h1,
+.blog .part1 h1,
+.contactUs .part1 h1 {
+    font-size: 55px;
+    text-transform: capitalize;
+}
+
+.products .part2 {
+    display: flex;
+    flex-direction: column;
+    padding: 50px var(--plr);
+    width: 100vw;
+    gap: 2rem;
+}
+
+.products .part2 > div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.products .part2 > div:nth-child(1) h2 {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.products .part2 > div:nth-child(1) select {
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid var(--txtColor);
+    outline: none;
+}
+
+.products .part2 > div:nth-child(1) select:focus {
+    border: 1px solid var(--main);
+}
+
+.products .part2 > div:nth-child(2) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "part1Box1 part1Box2 part1Box3"
+        "part1Box4 part1Box5 part1Box6"
+        "part1Box7 part1Box8 part1Box9";
+    gap: 2rem;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(1) {
+    grid-area: part1Box1;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(2) {
+    grid-area: part1Box2;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(3) {
+    grid-area: part1Box3;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(4) {
+    grid-area: part1Box4;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(5) {
+    grid-area: part1Box5;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(6) {
+    grid-area: part1Box6;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(7) {
+    grid-area: part1Box7;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(8) {
+    grid-area: part1Box8;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(9) {
+    grid-area: part1Box9;
+}
+
+.products .part2 > div:nth-child(2) aside:nth-child(1) {
+    grid-area: part1Box1;
+}
+
+/* end products page */
+/* start about-us page */
+
+.aboutUs .part1,
+.contactUs .part1 {
+    padding: 6vw var(--plr) 16vw;
+}
+
+.aboutUs .part2 {
+    width: 100vw;
+    padding: 0 var(--plr) 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas:
+        "part2Img part2Img part2Img part2Img"
+        "part2Img part2Img part2Img part2Img"
+        "part2Box2 part2Box3 part2Box4 part2Box5";
+    margin-top: -12vw;
+}
+
+.aboutUs .part2 img {
+    grid-area: part2Img;
+    width: 100%;
+    height: 40vw;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.aboutUs .part2 div:nth-child(2) {
+    grid-area: part2Box2;
+    background-color: #f3f5f7;
+    border-bottom-left-radius: 20px;
+}
+
+.aboutUs .part2 div:nth-child(3) {
+    grid-area: part2Box3;
+    background-color: #eceef0;
+}
+
+.aboutUs .part2 div:nth-child(4) {
+    grid-area: part2Box4;
+    background-color: #e2e6ea;
+}
+
+.aboutUs .part2 div:nth-child(5) {
+    grid-area: part2Box5;
+    background-color: #dadee3;
+    border-bottom-right-radius: 20px;
+}
+
+.aboutUs .part2 div {
+    padding: 3vw 2.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: left;
+    gap: 10px;
+    transition: all ease 0.3s;
+}
+
+.aboutUs .part2 div:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.aboutUs .part2 div h2 {
+    font-size: 22px;
+}
+
+.aboutUs .part2 div p {
+    color: #4d5d6d;
+    margin-top: 10px;
+    line-height: 30px;
+    transition: all ease 0.3s;
+}
+
+.aboutUs .part2 div:hover p {
+    color: #eee;
+}
+
+.aboutUs .part3 {
+    padding: 50px var(--plr);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.aboutUs .part3 h2 {
+    font-size: 45px;
+}
+
+.aboutUs .part3 aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "part3Number1 part3Number3 part3Number5"
+        "part3Title2 part3Title4 part3Title6";
+    row-gap: 1rem;
+    column-gap: 5vw;
+    margin: 2.5rem 0;
+}
+
+.aboutUs .part3 aside span:nth-child(1) {
+    grid-area: part3Number1;
+}
+
+.aboutUs .part3 aside span:nth-child(3) {
+    grid-area: part3Number3;
+}
+
+.aboutUs .part3 aside span:nth-child(5) {
+    grid-area: part3Number5;
+}
+
+.aboutUs .part3 aside h3:nth-child(2) {
+    grid-area: part3Title2;
+}
+
+.aboutUs .part3 aside h3:nth-child(4) {
+    grid-area: part3Title4;
+}
+
+.aboutUs .part3 aside h3:nth-child(6) {
+    grid-area: part3Title6;
+}
+
+.aboutUs .part3 aside span {
+    color: var(--main);
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.aboutUs .part3 aside h3 {
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.aboutUs .part3 div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "part3Text part3Text"
+        "part3Link1 part3Link2";
+    row-gap: 2rem;
+    column-gap: 1rem;
+}
+
+.aboutUs .part3 div p {
+    grid-area: part3Text;
+    color: #39414d;
+    font-size: 17px;
+    line-height: 30px;
+    padding: 0 5vw;
+}
+
+.aboutUs .part3 div a:nth-child(2) {
+    grid-area: part3Link1;
+    width: fit-content;
+    justify-self: end;
+}
+
+.aboutUs .part3 div a:nth-child(3) {
+    grid-area: part3Link2;
+    width: fit-content;
+    justify-self: start;
+}
+
+.aboutUs .part3 div a,
+.aboutUs .part5 > a {
+    background-color: #f3f5f7;
+    border-radius: 7px;
+    padding: 18px 35px;
+    text-align: center;
+    color: #000;
+    font-size: 15px;
+    transition: all ease 0.3s;
+}
+
+.aboutUs .part3 div a:hover {
+    background-color: var(--main);
+    color: #fff;
+    cursor: pointer;
+}
+
+.aboutUs .part4 div:nth-child(2) {
+    background-color: #111518;
+    width: 100vw;
+    padding: 100px var(--plr);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.aboutUs .part4 div:nth-child(2) img {
+    width: 7vw;
+}
+
+.aboutUs .part5 {
+    width: 100vw;
+    padding: 50px var(--plr);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    grid-template-areas:
+        "part5Heading part5Heading"
+        "part5Box2 part5Box3"
+        "part5Box4 part5Box5"
+        "part5Link part5Link";
+    gap: 2.5rem;
+}
+
+.aboutUs .part5 h2 {
+    grid-area: part5Heading;
+    font-size: 30px;
+    text-align: center;
+}
+
+.aboutUs .part5 div:nth-child(2) {
+    grid-area: part5Box2;
+}
+
+.aboutUs .part5 div:nth-child(3) {
+    grid-area: part5Box3;
+}
+
+.aboutUs .part5 div:nth-child(4) {
+    grid-area: part5Box4;
+}
+
+.aboutUs .part5 div:nth-child(5) {
+    grid-area: part5Box5;
+}
+
+.aboutUs .part5 > a {
+    grid-area: part5Link;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    align-self: center;
+    justify-self: center;
+}
+
+.aboutUs .part5 > a:hover {
+    background-color: #e2e6ea;
+}
+
+.aboutUs .part5 > a i {
+    font-size: 25px;
+    margin-bottom: -5px;
+}
+
+.aboutUs .part5 div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto auto;
+    grid-template-areas:
+        "part5Img part5Text part5Text"
+        ". part5Name part5Name"
+        ". part5Job part5Job";
+    box-shadow: 0 0 30px 0 #eee;
+    padding: 3vw;
+    border-radius: 20px;
+    row-gap: 5px;
+    column-gap: 30px;
+}
+
+.aboutUs .part5 div img {
+    grid-area: part5Img;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 1000px;
+}
+
+.aboutUs .part5 div p {
+    grid-area: part5Text;
+    color: #4d5d6d;
+    line-height: 28px;
+    margin-bottom: 2rem;
+}
+
+.aboutUs .part5 div h3 {
+    grid-area: part5Name;
+    font-size: 17px;
+}
+
+.aboutUs .part5 div span {
+    grid-area: part5Job;
+    color: #4d5d6d;
+    font-size: 15px;
+}
+
+.cart .part1 {
+    padding: var(--plr);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cart .part1 h1 {
+    font-size: 30px;
+    margin-bottom: 1rem;
+}
+
+.cart .part1 div {
+    background-color: #f0f1f3;
+    color: #4d5d6d;
+    padding: 20px 25px;
+    border-radius: 7px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.cart .part1 div i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.cart .part1 .returnToShop {
+    padding: 15px 20px;
+    background-color: #f0f1f3;
+    color: #000;
+    border-radius: 7px;
+    font-size: 15px;
+    width: fit-content;
+    transition: all ease 0.3s;
+}
+
+.cart .part1 .returnToShop:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.cart .part2 {
+    padding: var(--plr);
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "part2Title part2Title"
+        "part2Main part2Aside";
+    column-gap: 3rem;
+}
+
+.cart .part2 > h1 {
+    grid-area: part2Title;
+    font-size: 30px;
+}
+
+.cart .part2 > div {
+    grid-area: part2Main;
+}
+
+.cart .part2 > aside {
+    grid-area: part2Aside;
+    min-width: 25vw;
+    height: fit-content;
+    padding: 2vw;
+    border-radius: 7px;
+    border: 2px solid #eee;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+        "CartTotalTitle CartTotalTitle"
+        "CartTotalSubtotal CartTotalNumber1"
+        "CartTotalTotal CartTotalNumber2"
+        "CartTotalCheckout CartTotalCheckout";
+}
+
+.cart .part2 aside h1 {
+    grid-area: CartTotalTitle;
+    font-size: 20px;
+    margin-bottom: 2rem;
+}
+
+.cart .part2 aside h2:nth-child(2) {
+    grid-area: CartTotalSubtotal;
+    font-size: 16px;
+    color: #4d5d6d;
+    font-weight: normal;
+    align-self: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.cart .part2 aside span:nth-child(3) {
+    grid-area: CartTotalNumber1;
+    font-size: 16px;
+    color: #39414d;
+    text-align: right;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.cart .part2 aside h2:nth-child(4) {
+    grid-area: CartTotalTotal;
+    font-size: 16px;
+    color: #4d5d6d;
+    font-weight: normal;
+    align-self: center;
+}
+
+.cart .part2 aside span:nth-child(5) {
+    grid-area: CartTotalNumber2;
+    font-size: 16px;
+    color: #39414d;
+    justify-self: end;
+    font-weight: bold;
+    align-self: center;
+}
+
+.cart .part2 aside input {
+    grid-area: CartTotalCheckout;
+    background-color: #f2f4f7;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 7px;
+    margin-top: 3rem;
+    padding: 15px;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 aside input:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.cart .part2 table thead,
+.cart .part2 table tbody,
+.cart .part2 table tr {
+    width: 100%;
+}
+
+.cart .part2 table {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart .part2 table thead {
+    border-bottom: 2px solid #eee;
+    display: inline-flex;
+    padding: 1.5rem 0;
+}
+
+.cart .part2 table thead tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "part2Title1 part2Title1 part2Title2 part2Title3";
+}
+
+.cart .part2 table thead tr th:nth-child(1) {
+    grid-area: part2Title1;
+    text-align: left;
+}
+
+.cart .part2 table thead tr th:nth-child(2) {
+    grid-area: part2Title2;
+}
+
+.cart .part2 table thead tr th:nth-child(3) {
+    grid-area: part2Title3;
+}
+
+.cart .part2 table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "part2Box1 part2Box1 part2Box2 part2Box3";
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) {
+    grid-area: part2Box1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "part2Box1Image part2Box1Name"
+        "part2Box1Image part2Box1Price";
+    row-gap: 5px;
+    column-gap: 20px;
+}
+
+.cart .part2 table tbody tr {
+    border-bottom: 2px solid #eee;
+    padding: 1.5rem 0;
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) a:nth-child(1) {
+    grid-area: part2Box1Image;
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) a:nth-child(1) img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) a:nth-child(2) h3 {
+    grid-area: part2Box1Name;
+    font-size: 17px;
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) a:nth-child(2) {
+    align-self: flex-end;
+    color: #4d5d6d;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) a:nth-child(2):hover {
+    color: var(--main);
+}
+
+.cart .part2 table tbody tr > td:nth-child(1) p {
+    grid-area: part2Box1Price;
+    align-self: flex-start;
+    color: #4d5d6d;
+}
+
+.cart .part2 table tbody tr td:nth-child(2) {
+    grid-area: part2Box2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid #eee;
+    border-radius: 7px;
+    padding: 10px;
+    color: #4d5d6d;
+}
+
+.cart .part2 table tbody tr td:nth-child(2) button {
+    width: 25px;
+    height: 25px;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    font-size: 20px;
+    border-radius: 7px;
+    color: #4d5d6d;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 table tbody tr td:nth-child(2) button:hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.cart .part2 table tbody tr > td:nth-child(3) {
+    grid-area: part2Box3;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart .part2 table tbody tr > td:nth-child(3) span {
+    color: #4d5d6d;
+}
+
+.cart .part2 table tbody tr > td:nth-child(3) i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translate(0, -35%);
+    font-size: 20px;
+    color: #4d5d6d;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 table tbody tr > td:nth-child(3) i:hover {
+    color: red;
+}
+
+.cart .part2 > div form {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: "part2Input1 part2Input2 part2Input3";
+    margin-top: 2rem;
+    gap: 10px;
+}
+
+.cart .part2 > div form input:nth-child(1) {
+    grid-area: part2Input1;
+    border: 2px solid #eee;
+    outline: none;
+    border-radius: 7px;
+    padding: 15px;
+    color: #4d5d6d;
+    justify-self: start;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 > div form input:nth-child(1):focus {
+    border: 2px solid var(--main);
+}
+
+.cart .part2 > div form input:nth-child(2) {
+    grid-area: part2Input2;
+}
+
+.cart .part2 > div form input:nth-child(3) {
+    grid-area: part2Input3;
+    width: 100%;
+}
+
+.cart .part2 > div form input:nth-child(2),
+.cart .part2 > div form input:nth-child(3) {
+    border-radius: 7px;
+    padding: 15px 30px;
+    justify-self: start;
+    background-color: #f3f5f7;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.cart .part2 > div form input:nth-child(2):hover,
+.cart .part2 > div form input:nth-child(3):hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+/* end cart page */
+/* start blog page */
+
+.blog .part2 {
+    width: 100vw;
+    padding: 2rem var(--plr);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "part1Box1 part1Box2 part1Box3"
+        "part1Box4 part1Box5 part1Box6";
+    gap: 2rem;
+}
+
+.blog .part2 aside:nth-child(1) {
+    grid-area: part1Box1;
+}
+
+.blog .part2 aside:nth-child(2) {
+    grid-area: part1Box2;
+}
+
+.blog .part2 aside:nth-child(3) {
+    grid-area: part1Box3;
+}
+
+.blog .part2 aside:nth-child(4) {
+    grid-area: part1Box4;
+}
+
+.blog .part2 aside:nth-child(5) {
+    grid-area: part1Box5;
+}
+
+.blog .part2 aside:nth-child(6) {
+    grid-area: part1Box6;
+}
+
+.blog .part2 aside {
+    width: 100%;
+}
+
+/* end blog page */
+/* start contactUs page */
+
+.contactUs .part2 {
+    width: 90vw;
+    padding: 0 var(--plr);
+    display: flex;
+    flex-direction: row;
+    padding: 3vw;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px #eee;
+    margin: -6rem auto 6vw auto;
+    background-color: #fff;
+    gap: 1rem;
+}
+
+.contactUs .part2 div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto auto;
+    grid-template-areas:
+        "part2Icon part2Heading"
+        ". part2Text1"
+        ". part2Text2";
+    row-gap: 7px;
+    column-gap: 1.5rem;
+    text-align: left;
+    width: 100%;
+}
+
+.contactUs .part2 div i {
+    grid-area: part2Icon;
+    color: var(--main);
+    font-size: 40px;
+}
+
+.contactUs .part2 div h2 {
+    grid-area: part2Heading;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.contactUs .part2 div p:nth-child(3) {
+    grid-area: part2Text1;
+    color: #4d5d6d;
+}
+
+.contactUs .part2 div p:nth-child(4) {
+    grid-area: part2Text2;
+    color: #4d5d6d;
+}
+
+.contactUs .part3 {
+    width: 100vw;
+    padding: 0 var(--plr);
+    display: flex;
+    flex-direction: row;
+    gap: 4vw;
+}
+
+.contactUs .part3 iframe {
+    width: 100%;
+    border-radius: 7px;
+    height: auto;
+}
+
+.contactUs .part3 form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px auto auto auto auto auto auto;
+    grid-template-areas:
+        "part3Heading part3Heading"
+        "part3Text part3Text"
+        "part3Input3 part3Input4"
+        "part3Input5 part3Input6"
+        "part3Input7 part3Input7"
+        "part3textarea part3textarea"
+        "part3Input9 part3Input9";
+    gap: 20px;
+}
+
+.contactUs .part3 form h2 {
+    grid-area: part3Heading;
+    font-size: 30px;
+}
+
+.contactUs .part3 form p {
+    grid-area: part3Text;
+    color: #4d5d6d;
+    font-size: 17px;
+    line-height: 30px;
+}
+
+.contactUs .part3 form input:nth-child(3) {
+    grid-area: part3Input3;
+}
+
+.contactUs .part3 form input:nth-child(4) {
+    grid-area: part3Input4;
+}
+
+.contactUs .part3 form input:nth-child(5) {
+    grid-area: part3Input5;
+}
+
+.contactUs .part3 form input:nth-child(6) {
+    grid-area: part3Input6;
+}
+
+.contactUs .part3 form input:nth-child(7) {
+    grid-area: part3Input7;
+}
+
+.contactUs .part3 form textarea {
+    grid-area: part3textarea;
+}
+
+.contactUs .part3 form input:nth-child(9) {
+    grid-area: part3Input9;
+    width: fit-content;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 15px 30px;
+    color: #000;
+    background-color: #f3f5f7;
+    transition: all ease 0.3s;
+}
+
+.contactUs .part3 form input:nth-child(9):hover {
+    background-color: var(--main);
+    color: #fff;
+}
+
+.contactUs .part3 form input,
+.contactUs .part3 form textarea {
+    padding: 15px;
+    border-radius: 7px;
+    border: 2px solid #eee;
+    outline: none;
+    resize: none;
+}
+
+.contactUs .part3 form input:focus,
+.contactUs .part3 form textarea:focus {
+    border: 2px solid var(--main);
+}
+
+.contactUs .part3 form input::placeholder,
+.contactUs .part3 form textarea::placeholder {
+    color: #888;
+    font-size: 14px;
+}
+
+/* end contactUs page */
+
+@media only screen and (max-width: 1000px) {
+    header nav {
+        display: none;
+    }
+
+    footer > div:nth-child(1) {
+        padding: 10vw 0;
+        background-color: #181c1f;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            ". footerHeading footerHeading footerHeading footerHeading ."
+            ". footerInput footerInput footerInput footerBtn .";
+    }
+
+    footer > div:nth-child(1) h1 {
+        font-size: 30px;
+    }
+
+    footer > div:nth-child(1) input:nth-child(3) {
+        font-size: 15px;
+    }
+
+    footer > div:nth-child(2) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr auto;
+        grid-template-areas:
+            "footerBox1 footerBox2"
+            "footerBox3 footerBox4"
+            "footerCopyRight footerCopyRight";
+        gap: 3rem;
+    }
+
+    /* start homePage 1000px */
+
+    .homePage .part1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .homePage .part1 aside:nth-child(1) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        width: 50%;
+        gap: 0;
+        margin-bottom: -20vw;
+        z-index: 1;
+    }
+
+    .homePage .part1 img {
+        width: 75%;
+    }
+
+    .homePage .part1 aside:nth-child(1) p {
+        align-self: center;
+    }
+
+    .homePage .part1 aside:nth-child(1) h1 {
+        margin: 0 0 2rem;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "part1Li1 part1Li2"
+            "part1Li3 part1Li4";
+        gap: 2rem;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li:nth-child(1) {
+        grid-area: part1Li1;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li:nth-child(2) {
+        grid-area: part1Li2;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li:nth-child(3) {
+        grid-area: part1Li3;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li:nth-child(4) {
+        grid-area: part1Li4;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li h4,
+    .homePage .part1 aside:nth-child(3) ul li p {
+        text-align: left;
+    }
+
+    .homePage .part2 {
+        background-color: white;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "part2Box1 part2Box1"
+            "part2Box2 part2Box2"
+            "part2Box3 part2Box4";
+    }
+
+    .homePage .part2 div {
+        box-shadow: 0 0 25px 5px #eee;
+        padding: 4vw;
+    }
+
+    .homePage .part3 {
+        padding-top: 0;
+        padding-bottom: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "part3Box1 part3Box2"
+            "part3Box3 part3Box4"
+            "part3Box5 part3Box5";
+    }
+
+    .homePage .part3 div:nth-child(5) aside h1 {
+        font-size: 40px;
+    }
+
+    .homePage .part3 div:nth-child(5) aside {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            "part3Heading part3Heading part3Heading"
+            "part3Text part3Text part3Text"
+            "part3Button part3Link .";
+    }
+
+    .homePage .part5 aside:nth-child(2) h1 {
+        font-size: 45px;
+    }
+
+    .homePage .part5 aside:nth-child(2) h4 {
+        font-size: 18px;
+    }
+
+    .homePage .part5 aside:nth-child(3) {
+        width: 30vw;
+        left: 20vw;
+        top: 20vw;
+    }
+
+    .homePage .part6 {
+        padding-bottom: 0;
+    }
+
+    .homePage .part6 > div {
+        padding: 2rem;
+        gap: 1rem;
+    }
+
+    .homePage .part6 > div aside {
+        padding: 10px;
+    }
+
+    .homePage .part6 > div aside i {
+        font-size: 35px;
+    }
+
+    .homePage .part6 > div h2 {
+        font-size: 20px;
+    }
+
+    .homePage .part6 > div p {
+        line-height: 27px;
+    }
+
+    .homePage .part6 > div button {
+        font-size: 15px;
+        padding: 1rem 1.5rem;
+    }
+
+    .homePage .part7 > div:nth-child(2) aside div,
+    .blog .part2 aside div {
+        padding: 1.5rem;
+        gap: 10px;
+    }
+
+    /* end homePage 1000px */
+    /* start products 1000px */
+
+    .products .part1 {
+        padding: 15vw var(--plr);
+    }
+
+    .products .part1 h1,
+    .aboutUs .part1 h1,
+    .blog .part1 h1,
+    .contactUs .part1 h1 {
+        font-size: 40px;
+    }
+
+    .products .part1 nav ul,
+    .aboutUs .part1 nav ul {
+        font-size: 14px;
+    }
+
+    /* end products 1000px */
+    /* start aboutUs 1000px */
+
+    .aboutUs .part1 {
+        padding: 6vw var(--plr) 28vw;
+    }
+
+    .aboutUs .part2 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr auto auto;
+        grid-template-areas:
+            "part2Img part2Img"
+            "part2Img part2Img"
+            "part2Box2 part2Box3"
+            "part2Box4 part2Box5";
+        padding: 0 var(--plr);
+        margin-top: -22vw;
+    }
+
+    .aboutUs .part2 div:nth-child(2) {
+        border-bottom-left-radius: 0;
+    }
+
+    .aboutUs .part2 div:nth-child(4) {
+        border-bottom-left-radius: 20px;
+    }
+
+    .aboutUs .part3 h2 {
+        font-size: 35px;
+    }
+
+    .aboutUs .part3 aside span {
+        font-size: 40px;
+    }
+
+    .aboutUs .part3 div p {
+        padding: 0;
+    }
+
+    .aboutUs .part4 div:nth-child(2) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "part4Img1 part4Img2 part4Img3"
+            "part4Img4 part4Img5 part4Img6";
+        gap: 2rem;
+        padding: 50px var(--plr);
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(1) {
+        grid-area: part4Img1;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(2) {
+        grid-area: part4Img2;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(3) {
+        grid-area: part4Img3;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(4) {
+        grid-area: part4Img4;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(5) {
+        grid-area: part4Img5;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img:nth-child(6) {
+        grid-area: part4Img6;
+    }
+
+    .aboutUs .part4 div:nth-child(2) img {
+        align-self: center;
+        justify-self: center;
+    }
+
+    .aboutUs .part5,
+    .aboutUs .part5 div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .aboutUs .part5 div {
+        padding: 10vw 8vw;
+    }
+
+    .aboutUs .part5 div img {
+        margin-bottom: 10vw;
+    }
+
+    /* end aboutUs 1000px */
+    /* start contactUs 1000px */
+
+    .contactUs .part2 div {
+        column-gap: 1rem;
+    }
+
+    .contactUs .part2 div i {
+        font-size: 35px;
+    }
+
+    .contactUs .part2 div h2 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .contactUs .part3 {
+        flex-direction: column;
+    }
+
+    .contactUs .part3 iframe {
+        height: 60vw;
+    }
+
+    /* end contactUs 1000px */
+    /* start cart 1000px */
+
+    .cart .part2 {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* end cart 1000px */
+}
+
+@media only screen and (max-width: 850px) {
+    /* start contactUs 850px */
+
+    .contactUs .part2 {
+        flex-direction: column;
+        row-gap: 3vw;
+    }
+
+    .contactUs .part2 div {
+        padding: 3vw;
+    }
+
+    .contactUs .part2 div i {
+        font-size: 45px;
+    }
+
+    .contactUs .part2 div h2 {
+        font-size: 22px;
+    }
+
+    /* end contactUs 850px */
+}
+
+@media only screen and (max-width: 690px) {
+    footer > div:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 8vw var(--plr) 8vw;
+        row-gap: 2rem;
+    }
+
+    footer > div:nth-child(1) h1 {
+        font-size: 25px;
+    }
+
+    footer > div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    footer > div:nth-child(2) aside:nth-child(1) {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    footer > div:nth-child(2) aside:nth-child(1) ul {
+        justify-content: center;
+    }
+
+    footer > div:nth-child(2) aside:nth-child(2) ul,
+    footer > div:nth-child(2) aside:nth-child(3) ul {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer > div:nth-child(2) aside:nth-child(1) img {
+        width: 50%;
+    }
+
+    /* start homePage 690px */
+
+    .homePage .part1 {
+        padding-bottom: 3rem;
+    }
+
+    .homePage .part1 img {
+        display: none;
+    }
+
+    .homePage .part1 aside:nth-child(1) {
+        margin-bottom: 3rem;
+        width: 90%;
+    }
+
+    .homePage .part1 aside:nth-child(1) h1 {
+        font-size: 30px;
+    }
+
+    .homePage .part1 aside:nth-child(1) a {
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    .homePage .part1 aside:nth-child(1) button {
+        font-size: 16px;
+        padding: 15px;
+        margin-right: 5px;
+    }
+
+    .homePage .part1 aside:nth-child(3) {
+        position: relative;
+        width: 90vw;
+        padding: 40px 40px;
+        bottom: unset;
+        left: unset;
+        transform: unset;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8vw;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .homePage .part1 aside:nth-child(3) ul li i {
+        margin-bottom: 10px;
+    }
+
+    .homePage .part2 {
+        padding: 50px var(--plr);
+    }
+
+    .homePage .part2,
+    .homePage .part3 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .homePage .part2 div {
+        min-height: 90vw;
+        padding: 8vw;
+    }
+
+    .homePage .part3 div {
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    .homePage .part3 div:nth-child(5) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .homePage .part3 div:nth-child(5) aside h1 {
+        font-size: 30px;
+    }
+
+    .homePage .part3 div:nth-child(5) aside {
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "part3Heading part3Heading"
+            "part3Text part3Text"
+            "part3Button part3Link";
+    }
+
+    .homePage .part3 div:nth-child(5) aside button {
+        width: fit-content;
+        justify-self: end;
+        padding: 1rem 1.7rem;
+    }
+
+    .homePage .part3 div:nth-child(5) aside a {
+        width: fit-content;
+        justify-self: start;
+    }
+
+    .homePage .part3 div:nth-child(5) aside p {
+        margin-bottom: 2rem;
+    }
+
+    .homePage .part3 div:nth-child(5) img {
+        width: 85%;
+        padding-top: 2rem;
+    }
+
+    .homePage .part4 > div:nth-child(1),
+    .homePage .part7 > div:nth-child(1),
+    .contactUs .part4 > div:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .homePage .part4 div:nth-child(2),
+    .products .part2 div:nth-child(2),
+    .contactUs .part4 div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .homePage .part4 > div:nth-child(2) aside,
+    .homePage .part5,
+    .homePage .part6,
+    .homePage .part6 div,
+    .homePage .part7,
+    .homePage .part7 div:nth-child(2),
+    .products .part2 > div:nth-child(2) aside,
+    .blog .part2,
+    .contactUs .part4 div:nth-child(2) aside {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .homePage .part4 > div:nth-child(2) aside img,
+    .products .part2 > div:nth-child(2) aside img,
+    .contactUs .part4 div:nth-child(2) aside img {
+        height: auto;
+        width: 100%;
+    }
+
+    .homePage .part5 aside:nth-child(3) {
+        display: none;
+    }
+
+    .homePage .part5 img {
+        width: 85%;
+    }
+
+    .homePage .part5 aside:nth-child(2) {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .homePage .part6 > div {
+        padding: 1.5rem;
+    }
+
+    .homePage .part7 > div:nth-child(2) aside {
+        width: 100%;
+    }
+
+    .homePage .part7 > div:nth-child(2) aside img,
+    .blog .part2 aside img {
+        height: 45vw;
+    }
+
+    .homePage .part5 aside:nth-child(2) h1 {
+        font-size: 35px;
+    }
+
+    .homePage .part7 > div:nth-child(2) aside div,
+    .blog .part2 aside div {
+        padding: 8vw;
+        gap: 15px;
+        text-align: left;
+    }
+
+    /* end homePage 690px */
+    /* start products 690px */
+
+    .products .part1 nav ul,
+    .aboutUs .part1 nav ul {
+        font-size: 12px;
+    }
+
+    .products .part1 h1,
+    .aboutUs .part1 h1,
+    .blog .part1 h1,
+    .contactUs .part1 h1 {
+        font-size: 35px;
+        padding-bottom: 10vw;
+    }
+
+    /* end products 690px */
+    /* start aboutUs 690px */
+
+    .aboutUs .part1 {
+        padding: 6vw var(--plr) 38vw;
+    }
+
+    .aboutUs .part2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: -30vw;
+    }
+
+    .aboutUs .part2 div {
+        padding: 6vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .aboutUs .part2 div:nth-child(4) {
+        border-bottom-left-radius: 0;
+    }
+
+    .aboutUs .part2 div:nth-child(5) {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .aboutUs .part3 h2 {
+        font-size: 25px;
+    }
+
+    .aboutUs .part3 aside {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .aboutUs .part4 div:nth-child(2) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            "part4Img1 part4Img2"
+            "part4Img3 part4Img4"
+            "part4Img5 part4Img6";
+    }
+
+    .aboutUs .part4 div:nth-child(2) img {
+        width: 15vw;
+    }
+
+    /* end aboutUs 690px */
+    /* start contactUs 690px */
+
+    .contactUs .part3 form {
+        text-align: center;
+    }
+
+    .contactUs .part3 input:nth-child(9) {
+        margin: auto;
+    }
+
+    /* end contactUs 690px */
+
+    /* start cart 690px */
+
+    thead tr th:nth-child(2),
+    thead tr th:nth-child(3) {
+        display: none;
+    }
+
+    .cart .part2 > div form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cart .part2 table tbody tr > td:nth-child(3) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cart .part2 table tbody tr > td:nth-child(3) i {
+        position: unset;
+        transform: unset;
+    }
+
+    .cart .part2 table tbody tr {
+        grid-template-columns: 1fr auto auto;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "part2Box1 part2Box2"
+            "part2Box1 part2Box3";
+    }
+
+    /* end cart 690px */
+}
+
+@media only screen and (max-width: 420px) {
+    .products .part2 > div:nth-child(1) {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .aboutUs .part2 div {
+        padding: 8vw 5vw;
+    }
+
+    .aboutUs .part2 div h2 {
+        font-size: 18px;
+    }
+
+    .aboutUs .part2 div span {
+        font-size: 15px;
+    }
+
+    .aboutUs .part2 div p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .aboutUs .part3 div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .aboutUs .part3 div p {
+        font-size: 16px;
+    }
+}
+
+.spinner {
+    border: 2px solid gray;
+    border-radius: 50%;
+    border-right: 2px solid black;
+    animation: spin 1s linear 0s infinite normal;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
