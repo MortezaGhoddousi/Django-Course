@@ -1,8 +1,9 @@
 from .models import User
 from django.http import JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
 
@@ -20,8 +21,9 @@ def signup(request):
                 "userID": user.id,
             })
     
-
+@csrf_exempt
 def login(request):
+    print(request.method)
     if request.method == "POST":
         data = json.loads(request.body)
         username = data.get("username")

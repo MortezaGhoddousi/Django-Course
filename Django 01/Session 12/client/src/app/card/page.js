@@ -6,9 +6,15 @@ import axios from "axios";
 export default function Cart() {
     const [products, setProducts] = useState([]);
     const [user, setUser] = useState(null);
+    const [sum, setSum] = useState(0);
+    const [final, setFinal] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [userAllProducts, setUserAllProducts] = useState([]);
+    const [coupon, setCoupon] = useState('');
 
+
+    // Function to get the CSRF cookie
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
@@ -16,9 +22,7 @@ export default function Cart() {
             for (let cookie of cookies) {
                 cookie = cookie.trim();
                 if (cookie.startsWith(name + "=")) {
-                    cookieValue = decodeURIComponent(
-                        cookie.substring(name.length + 1)
-                    );
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                     break;
                 }
             }
@@ -26,6 +30,17 @@ export default function Cart() {
         return cookieValue;
     }
 
+    // Fetch user-related products
+    useEffect(() => {
+        const userID = localStorage.getItem("userID");
+        axios
+            .post("http://localhost:8000/api/userallproducts/", { userID })
+            .then((result) => {
+                setUserAllProducts(result.data);
+            });
+    }, []);
+
+    // Check if user is logged in
     useEffect(() => {
         const loggedIn = localStorage.getItem("userID");
         if (!loggedIn) {
@@ -33,6 +48,7 @@ export default function Cart() {
         }
     }, []);
 
+    // Fetch user cards from API
     useEffect(() => {
         const fetchUserCards = async () => {
             const userID = localStorage.getItem("userID");
@@ -52,7 +68,7 @@ export default function Cart() {
                         }
                     );
 
-                    setProducts(res.data.products || []);
+                    setProducts(res.data.products || []);  // Set products data
                 } catch (err) {
                     console.error("API error:", err);
                     setError("Failed to load cart items");
@@ -69,16 +85,36 @@ export default function Cart() {
         };
 
         fetchUserCards();
-    }, []);
+    }, []);  // Ensure to load user cards only once when the component mounts
 
+    // Update total sum whenever products or userAllProducts change
+    useEffect(() => {
+        let total = 0;  // Local variable to accumulate the sum
+
+        // Loop over products and calculate total sum
+        if (products.length > 0){
+            products.forEach((product) => {
+                const p = userAllProducts.ups.filter(item => item.productID == product.id);
+                if (p.length > 0) {
+                    total += p[0].number * product.price;  // Accumulate the total sum
+                }
+            });
+    
+            setSum(total);  // Update the total sum in the state
+            setFinal(total);
+        }
+    }, [products, userAllProducts]);  // Recalculate when products or userAllProducts change
+
+    // Show loading state if data is being fetched
     if (loading) {
         return (
             <Fragment>
-                <div className="loading">Loading card...</div>
+                <div className="loading">Loading cart...</div>
             </Fragment>
         );
     }
 
+    // Show error message if there's an error
     if (error) {
         return (
             <Fragment>
@@ -87,6 +123,61 @@ export default function Cart() {
         );
     }
 
+    // Handle product quantity increase or decrease
+    const handleClick = (e) => {
+        const userID = localStorage.getItem("userID");
+        const productID = e.target.parentNode.parentNode.id;
+        const action = e.target.innerHTML === "+" ? "increase" : "decrease";
+
+        // Define the API endpoint based on the action
+        const endpoint = action === "increase" ? "increaseProduct/" : "decreaseProduct/";
+        const data = { userID, productID };
+
+        axios
+            .post(`http://localhost:8000/api/${endpoint}`, data)
+            .then((result) => {
+                if (result.data.success) {
+                    window.location.reload();
+                } else {
+                    console.error("Error with the operation:", result.data.message);
+                }
+            })
+            .catch((error) => {
+                console.error("API call failed:", error);
+            });
+    };
+
+    // Handle delete product from the cart
+    const deleteHandleClick = (e) => {
+        const userID = localStorage.getItem("userID");
+        const productID = e.target.parentNode.parentNode.id;
+        const data = { userID, productID };
+
+        axios.post(`http://localhost:8000/api/deleteProduct/`, data).then((result) => {
+            if (result.data.success) {
+                window.location.reload();
+            }
+        });
+    };
+
+
+
+    const handleChange = (e) => {
+        setCoupon(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (coupon == '1234') {
+            setFinal(prev => prev * 0.9);
+            setCoupon('');
+        }
+        else {
+            setCoupon('');
+        }
+    }
+
+    // Render the cart UI
     return (
         <Fragment>
             <article className="cart">
@@ -103,7 +194,7 @@ export default function Cart() {
                     </section>
                 ) : (
                     <section className="part2">
-                        <h1>Card</h1>
+                        <h1>Cart</h1>
                         <div>
                             <table className="cart">
                                 <thead>
@@ -115,14 +206,12 @@ export default function Cart() {
                                 </thead>
                                 <tbody>
                                     {products.map((product) => {
+                                        const p = userAllProducts.ups.filter(item => item.productID == product.id);
                                         return (
-                                            <tr key={product.id}>
+                                            <tr id={product.id} key={product.id}>
                                                 <td>
                                                     <a href="#">
-                                                        <img
-                                                            src={`/assets/${product.img}`}
-                                                            alt={product.name}
-                                                        />
+                                                        <img src={`/assets/${product.img}`} alt={product.name} />
                                                     </a>
                                                     <a href="#">
                                                         <h3>{product.title}</h3>
@@ -130,21 +219,21 @@ export default function Cart() {
                                                     <p>${product.price}</p>
                                                 </td>
                                                 <td>
-                                                    <button className="decreaseProductBtn">
+                                                    <button className="decreaseProductBtn" onClick={handleClick}>
                                                         -
                                                     </button>
-                                                    <span className="numberOfProduct"></span>
-                                                    <button className="increaseProductBtn">
+                                                    {/* Handle the case where p is empty */}
+                                                    <span className="numberOfProduct">{p.length > 0 ? p[0].number : 0}</span>
+                                                    <button className="increaseProductBtn" onClick={handleClick}>
                                                         +
                                                     </button>
                                                 </td>
                                                 <td className="delete">
-                                                    <span>$</span>
+                                                    <span>${p[0].number * product.price}</span>
                                                     <i
                                                         className="bx bxs-trash-alt"
-                                                        style={{
-                                                            cursor: "pointer",
-                                                        }}
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={deleteHandleClick}
                                                     ></i>
                                                 </td>
                                             </tr>
@@ -152,21 +241,23 @@ export default function Cart() {
                                     })}
                                 </tbody>
                             </table>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <input
                                     type="text"
                                     name="couponCode"
                                     placeholder="Coupon code"
+                                    onChange={handleChange}
+                                    value={coupon}
                                 />
                                 <input type="submit" value="Apply coupon" />
                             </form>
                         </div>
                         <aside>
-                            <h1>Card totals</h1>
+                            <h1>Cart totals</h1>
                             <h2>Subtotal</h2>
-                            <span>$</span>
+                            <span>${sum}</span>
                             <h2>Total</h2>
-                            <span>$</span>
+                            <span>${final}</span>
                             <input
                                 type="submit"
                                 name="ProceedToCheckout"

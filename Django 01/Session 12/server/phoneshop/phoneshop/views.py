@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
 from products.models import Product, UserProduct
 from django.forms.models import model_to_dict
 import json
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 def getUPS(user_id):
     userProduct = UserProduct.objects.filter(userID=user_id)
@@ -11,7 +12,7 @@ def getUPS(user_id):
         ups.append(i.productID)
     return ups
 
-
+@csrf_exempt
 def card(request):
     if request.method == 'POST':
         try:
