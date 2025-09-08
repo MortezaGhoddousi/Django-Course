@@ -1,0 +1,288 @@
+@font-face {
+  font-family: "Dana";
+  src: url("/fonts/dana medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --padding: 20vw;
+  --main: rgb(86 96 242);
+  --gray: rgb(221 225 230);
+  --graybg: rgb(74 78 87);
+  --graybgsec: rgb(92 96 104);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Dana", sans-serif;
+  direction: rtl;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+header {
+  width: 100%;
+  padding: 30px var(--padding);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 5fr 3fr;
+  gap: 15px;
+  border-bottom: 2px solid var(--gray);
+}
+
+header h1 {
+  color: var(--main);
+}
+
+header ul,
+header div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+header ul li {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header ul li:hover {
+  color: var(--main);
+}
+
+header div button {
+  background-color: var(--gray);
+  padding: 10px 25px;
+  border-radius: 4px;
+  width: max-content;
+  font-weight: bold;
+  border: none;
+  font-family: "Dana";
+  cursor: pointer;
+}
+
+header div a {
+  color: black;
+  text-decoration: none;
+  padding-right: 20px;
+  border-right: 1px solid var(--gray);
+}
+
+footer {
+  background-color: var(--graybg);
+  padding: 20px var(--padding);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+  color: #fff;
+}
+
+footer .faq {
+  width: 100%;
+}
+
+footer .faq ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding-top: 40px;
+}
+
+footer .faq ul li {
+  width: 100%;
+  padding: 13px 26px;
+  background-color: var(--graybgsec);
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+footer .info p {
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+footer .info p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .links {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  border-bottom: 1px solid var(--gray);
+}
+
+footer .links li {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+footer .content {
+  padding-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 20px;
+}
+
+footer .socialmedia {
+  align-self: center;
+}
+
+footer .socialmedia ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+footer .socialmedia ul li i {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.search {
+  padding: 50px var(--padding);
+}
+
+.search h1 {
+  font-size: 48px;
+  width: 20vw;
+  padding-bottom: 40px;
+}
+
+.search h1 span {
+  color: var(--main);
+}
+
+.search form {
+  padding: 30px 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.5fr;
+  gap: 8px;
+}
+
+.search form label {
+  width: 100%;
+}
+
+.search form label input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--graybgsec);
+  font-family: "Dana";
+}
+
+.search form label input[type="submit"] {
+  background-color: var(--main);
+  color: #fff;
+  cursor: pointer;
+}
+
+.help,
+.adg {
+  width: 100%;
+  padding: 40px var(--padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.help ul {
+  padding-top: 40px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.help ul li {
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.help ul li i {
+  font-size: 34px;
+}
+
+.help ul li p {
+  font-weight: bold;
+}
+
+.adg h1 {
+  padding-top: 50px;
+}
+
+.adg ul {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.adg ul li {
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  border-bottom: 1px solid var(--gray);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+}
+
+.adg ul li i {
+  font-size: 24px;
+}
+
+.register {
+  background-color: rgb(246 247 249);
+  width: 100%;
+  padding: 100px var(--padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.register h1 {
+  font-size: 48px;
+}
+
+.register button {
+  padding: 10px 45px;
+  border-radius: 4px;
+  border: 1px solid var(--graybgsec);
+  font-family: "Dana";
+  background-color: var(--main);
+  color: #fff;
+  cursor: pointer;
+}
