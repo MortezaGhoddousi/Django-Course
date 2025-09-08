@@ -70,7 +70,26 @@ def jobs(request):
         return JsonResponse(list(jobs), status=200, safe=False)
 
 
+def handleJobs(request, id):
+    if request.method == 'GET':
+        try:
+            job = jobs.objects.get(id=id)
+            return JsonResponse({'success': True, 'jobs': job})
+        except:
+            return JsonResponse({'success': False})
 
+    if request.method == 'DELETE':
+        try:
+            if not id:
+                return JsonResponse({'success': False, 'message': 'id not fount'})
+            job = jobs.objects.get(id=id)
+            job.delete()
+            return JsonResponse({'success': True, 'message': 'done! job deleted'})
+        except:
+            return JsonResponse({'success': False, 'message': 'data is wrong'})
+
+
+    # if request.method == 'PUT':
 
 
 
