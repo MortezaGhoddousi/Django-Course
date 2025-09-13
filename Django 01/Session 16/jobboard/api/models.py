@@ -5,10 +5,14 @@ class Users(models.Model):
     password = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.username
     
+class UserEmp(models.Model):
+    password = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    image = models.ImageField(upload_to='images/')
+    title = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now_add=True)
+   
 class Jobs(models.Model):
     employer = models.IntegerField()
     title = models.CharField(max_length=100)
