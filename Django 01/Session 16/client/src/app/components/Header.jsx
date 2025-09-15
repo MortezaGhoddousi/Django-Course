@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
 function Header() {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const empUser = localStorage.getItem("userID-emp");
+        const normUser = localStorage.getItem("userID");
+
+        setUser(empUser || normUser || null);
+    }, []);
+
     const router = useRouter();
 
     const handleClick = () => {
@@ -26,8 +36,17 @@ function Header() {
                 </li>
             </ul>
             <div>
-                <button onClick={handleClick}>ورود | ثبت نام</button>
-                <Link href="/emp-login">بخش کارفرایان | ثبت آگهی</Link>
+                {user ? (
+                    <Fragment>
+                        <button onClick={handleClick}>داشبورد</button>
+                        <Link href="">خروج</Link>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <button onClick={handleClick}>ورود | ثبت نام</button>
+                        <Link href="/emp-login">بخش کارفرایان | ثبت آگهی</Link>
+                    </Fragment>
+                )}
             </div>
         </header>
     );
