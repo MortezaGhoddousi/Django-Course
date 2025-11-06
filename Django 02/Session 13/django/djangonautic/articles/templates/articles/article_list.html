@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1>Article list</h1>
+<div class="articles">    
+    {% for a in articleKey %}
+        <div class="article">
+            <h2><a href="{% url 'articleAppName:detail' slugVariable=a.slug %}">{{a.title}}</a></h2>
+            <p>{{a.snippet}} ...</p>
+            <p>{{a.date}}</p>
+            <p>{{a.author}}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
